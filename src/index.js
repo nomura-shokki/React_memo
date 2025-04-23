@@ -1,17 +1,22 @@
+// Reactのライブラリをインポート
 import React from 'react';
+// ReactDOMの新しいAPI「createRoot」をインポート
 import ReactDOM from 'react-dom/client';
+// ReduxのProviderコンポーネントをインポート
+import { Provider } from 'react-redux';
+// グローバルスタイル（CSSファイル）をインポート
 import './index.css';
+// アプリケーションのメインコンポーネント「App」をインポート
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+// メモ管理用のReduxストアをインポート
+import MemoStore from './memo/Store';
 
+// createRootを使用してReactアプリをレンダリング
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    // Providerコンポーネントでアプリケーション全体をラップ
+    <Provider store={MemoStore}>
+        {/* アプリケーションのメインコンポーネント「App」をProvider内でレンダリング */}
+        <App />
+    </Provider>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
