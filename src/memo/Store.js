@@ -7,14 +7,10 @@ import { createStore } from 'redux';
 // ------------------------------------------
 // アプリケーションの初期状態を定義
 const initData = {
-  // メモデータの配列。初期データとして1つのサンプルデータが入っている
-  data: [{ 
-    message: 'sample data', // メモのメッセージ内容
-    created: new Date() // 作成日時
-  }],
-  message: 'please type message:', // メッセージ表示用の文字列（ユーザーへの指示など）
-  mode: 'default', // 現在のモード（"default", "find", "delete" などの切り替え）
-  fdata: [] // 検索結果のデータ（"find" モードで使用）
+  data:[], // ★
+  message:'please type message:',
+  mode:'default',
+  fdata:[]
 };
 
 // ------------------------------------------
@@ -47,21 +43,21 @@ export function memoReducer(state = initData, action) {
 // ------------------------------------------
 
 // メモ追加の処理
-function addReduce(state, action) {
-  // 新しいメモオブジェクトを作成
+function addReduce(state, action){
+  let d = new Date();
+  let f = d.getHours() + ':' + d.getMinutes()
+    + ':' + d.getSeconds();
   let data = {
-    message: action.message, // 新しいメモのメッセージ
-    created: new Date() // 作成日時を現在時刻に設定
+    message:action.message,
+    created:f
   };
-  // 既存のメモ配列をコピーして新しいメモを追加（非破壊的に状態を更新）
-  let newdata = state.data.slice(); // 元のデータをコピー
-  newdata.unshift(data); // 配列の先頭に新しいメモを挿入
-  // 更新された状態を返す
+  let newdata = state.data.slice();
+  newdata.unshift(data);
   return {
-    data: newdata, // 更新されたメモ配列
-    message: 'Added!', // ユーザーへの通知メッセージ
-    mode: 'default', // モードは "default" にリセット
-    fdata: [] // 検索結果をリセット
+    data:newdata,
+    message:'Added!',
+    mode:'default',
+    fdata:[]
   };
 }
 

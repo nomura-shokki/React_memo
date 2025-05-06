@@ -42,26 +42,15 @@ class Item extends Component {
   };
 
   // renderメソッド：ReactコンポーネントのUIを定義して描画
-  render() {
-    // 作成日時を取得
-    let d = this.props.value.created; // propsから受け取ったメモの作成日時
-    // 作成日時を「時:分:秒」の形式にフォーマット
-    let f = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
 
-    // JSX（JavaScript XML）でテーブル行を描画
+  render(){
     return (
-      <tr>
-        {/* メモ番号を表示するセル */}
-        <th style={this.th}>No, {this.props.index}</th>
-        
-        {/* メモ本文を表示するセル */}
-        <td style={this.td}>{this.props.value.message}</td>
-        
-        {/* 作成日時を表示するセル */}
-        <td style={this.date}>{f}</td>
-      </tr>
+    <tr><th style={this.th}>No, {this.props.index}</th>
+      <td style={this.td}>{this.props.value.message}</td>
+      <td style={this.date}>{this.props.value.created}</td>
+    </tr>
     );
-  }
+  }  
 }
 
 // Reduxのconnect関数を使用してItemコンポーネントを接続
