@@ -1,58 +1,83 @@
-// Reactのライブラリをインポート
-// Reactのクラスコンポーネントを使用してUIを作成するため
+// Reactライブラリをインポート
+// ReactでUIを構築するために必要なライブラリをインポートしています。
+// { Component }をインポートしているのは、クラスコンポーネントを使用するためです。
 import React, { Component } from 'react';
+
 // Reduxのconnect関数をインポート
-// connect関数を使用してコンポーネントをReduxストアと接続可能にする
+// connect関数を用いることで、コンポーネントをReduxストアと接続することができます。
+// これにより、ストア内の状態やアクションをコンポーネントで利用できるようになります。
 import { connect } from 'react-redux';
 
 // ------------------------------------------
-// Itemコンポーネントを定義
+// Itemコンポーネントの定義
 // ------------------------------------------
+// 個別のアイテム（例：メモ）のデータを表示するためのコンポーネントです。
+// テーブルの行（<tr>）としてUIを構築します。
 class Item extends Component {
-  // テーブルヘッダー（<th>）のスタイル設定
-  // メモ番号（No, X）を表示するために使用
+  // ------------------------------------------
+  // テーブルヘッダー（<th>）スタイルの設定
+  // ------------------------------------------
+  // フォントサイズ、背景色、テキストカラー、余白、幅をCSSで指定しています。
+  // このスタイルはメモの番号（例：No, X）を表示する部分に適用されます。
   th = {
-    fontSize: "14pt", // フォントサイズ
-    backgroundColor: "blue", // 背景色
-    color: "white", // テキストカラー
-    padding: "5px 10px", // 内側余白（上下5px、左右10px）
-    width: "50px" // 幅を固定（50px）
+    fontSize: "14pt",          // テキストのサイズを指定
+    backgroundColor: "blue",   // 背景色を青に設定
+    color: "white",            // テキストカラーを白に設定
+    padding: "5px 10px",       // 内側余白を上下5px、左右10pxに設定
+    width: "50px"              // 幅を固定値として50pxに設定
   };
 
-  // テーブルデータセル（<td>）のスタイル設定
-  // メモ本文を表示するために使用
+  // ------------------------------------------
+  // テーブルデータセル（<td>）スタイルの設定
+  // ------------------------------------------
+  // メモ本文を表示するセルに対するスタイルです。
+  // フォントサイズや背景色、枠線、最小幅などを指定しています。
   td = {
-    fontSize: "14pt", // フォントサイズ
-    backgroundColor: "white", // 背景色
-    color: "darkblue", // テキストカラー
-    padding: "5px 10px", // 内側余白（上下5px、左右10px）
-    border: "1px solid lightblue", // 薄い青色の枠線（境界線）
-    minWidth: "300px" // 幅の最小値を設定（300px以上を保証）
+    fontSize: "14pt",            // テキストのサイズを指定
+    backgroundColor: "white",    // 背景色を白に設定
+    color: "darkblue",           // テキストカラーを濃い青色に設定
+    padding: "5px 10px",         // 内側余白を上下5px、左右10pxに設定
+    border: "1px solid lightblue", // 枠線を薄い青色で設定
+    minWidth: "300px"            // セルの幅は最低でも300px以上を保証
   };
 
-  // テーブルデータセル（<td>）のスタイル設定
-  // 作成日時を表示するために使用
+  // ------------------------------------------
+  // 作成日時を表示するテーブルセル（<td>）のスタイル設定
+  // ------------------------------------------
+  // メモが作成された日時を表示する部分に適用されます。
+  // tdスタイルとは異なり幅を固定（80px）にしています。
   date = {
-    fontSize: "14pt", // フォントサイズ
-    backgroundColor: "white", // 背景色
-    color: "darkblue", // テキストカラー
-    padding: "5px 10px", // 内側余白（上下5px、左右10px）
-    border: "1px solid lightblue", // 境界線
-    width: "80px" // 幅を固定（80px）
+    fontSize: "14pt",            // テキストのサイズを指定
+    backgroundColor: "white",    // 背景色を白に設定
+    color: "darkblue",           // テキストカラーを濃い青色に設定
+    padding: "5px 10px",         // 内側余白を上下5px、左右10pxに設定
+    border: "1px solid lightblue", // 枠線を薄い青色で設定
+    width: "80px"                // 幅を固定値として80pxに設定
   };
 
-  // renderメソッド：ReactコンポーネントのUIを定義して描画
-
-  render(){
+  // ------------------------------------------
+  // renderメソッド
+  // ------------------------------------------
+  // ReactコンポーネントのUIを定義し、ブラウザ上に描画するメソッドです。
+  // このメソッド内で、propsを使って親コンポーネントから渡されたデータを表示しています。
+  render() {
     return (
-    <tr><th style={this.th}>No, {this.props.index}</th>
-      <td style={this.td}>{this.props.value.message}</td>
-      <td style={this.date}>{this.props.value.created}</td>
-    </tr>
+      // テーブルの1行（<tr>）を構築
+      <tr>
+        {/* テーブルヘッダー（<th>）内にメモ番号を表示 */}
+        <th style={this.th}>No, {this.props.index}</th>
+
+        {/* テーブルデータセル（<td>）内にメモ本文を表示 */}
+        <td style={this.td}>{this.props.value.message}</td>
+
+        {/* テーブルデータセル（<td>）内にメモの作成日時を表示 */}
+        <td style={this.date}>{this.props.value.created}</td>
+      </tr>
     );
-  }  
+  }
 }
 
 // Reduxのconnect関数を使用してItemコンポーネントを接続
-// 現在のコードではストアの状態を使用しないため、単純にconnect()で包んでいる
+// コンポーネントをReduxストアに接続することによって、ストアの状態やアクションが利用可能になります。
+// connect()を単純に用いてラップしているため、このコンポーネント自身はまだストアの状態を直接操作しません。
 export default connect()(Item);
