@@ -9,6 +9,7 @@ import Memo from './memo/Memo'; // メモのリスト表示用コンポーネン
 import AddForm from './memo/AddForm'; // メモを追加するフォーム
 import FindForm from './memo/FindForm'; // メモ検索用のフォーム
 import DelForm from './memo/DelForm'; // メモ削除用のフォーム
+import PersistForm from './memo/PersistForm'; // 永続化操作コンポーネント
 
 // ------------------------------------------
 // アプリケーションのメインコンポーネントを定義
@@ -46,6 +47,7 @@ class App extends Component {
               <td style={this.td}><FindForm /></td>
               {/* 削除フォーム。`td` スタイルを適用 */}
               <td style={this.td}><DelForm /></td>
+              <td style={this.td}><PersistForm /></td>
             </tr>
           </tbody>
         </table>

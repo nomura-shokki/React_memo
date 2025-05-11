@@ -15,7 +15,9 @@ import MemoStore, { memoReducer } from './memo/Store'; // メモ管理用のRedu
 // storage: 使用するストレージ（ここではlocalStorageを使用）
 const persistConfig = {
     key: 'memo',
-    storage,
+    storage: storage,
+    blacklist: ['message', 'mode', 'fdata'],
+    whilelist: ['data']
 };
 
 // リデューサーを永続化するための関数（persistReducer）を使用して新しいリデューサー（persistedReducer）を作成
